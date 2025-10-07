@@ -1,95 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Group Hangout Agenda</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Group Hangout Homepage</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f6fa;
-      margin: 0;
-      padding: 0;
+    body { 
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #1e293b; /* Dark blue-gray background */
+      color: #f1f5f9; /* Light text color */
+      margin: 0; 
+      padding: 0; 
     }
-    .container {
-      max-width: 700px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
-      padding: 32px;
+
+    .container { 
+      max-width: 700px; 
+      margin: 40px auto; 
+      background: #334155; /* Medium slate color */
+      border-radius: 12px; 
+      padding: 32px; 
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
     }
-    h1 {
-      text-align: center;
-      color: #303952;
-      margin-bottom: 24px;
+
+    h1, h2 { 
+      text-align: center; 
+      color: #f8fafc; /* Near white for headings */
+      margin-bottom: 1rem;
     }
-    .agenda-section {
-      margin-bottom: 32px;
+
+    img { 
+      width: 100%; 
+      height: auto; 
+      border-radius: 10px; 
+      margin-bottom: 20px; 
+      border: 3px solid #0ea5e9; /* Bright blue border */
     }
-    .agenda-list {
-      padding-left: 20px;
-      margin-bottom: 0;
+
+    #storyForm textarea { 
+      width: 100%; 
+      padding: 12px; 
+      font-size: 16px; 
+      border-radius: 8px; 
+      border: 2px solid #64748b; /* Steel blue border */
+      background-color: #1e293b; 
+      color: #f1f5f9;
+      resize: vertical;
+      transition: border-color 0.3s ease;
     }
-    .agenda-list li {
-      margin-bottom: 12px;
-      color: #535c68;
-    }
-    .add-item {
-      display: flex;
-      margin-top: 20px;
-    }
-    .add-item input {
-      padding: 8px;
-      flex: 1;
-      border: 1px solid #dff9fb;
-      border-radius: 4px 0 0 4px;
+
+    #storyForm textarea:focus {
+      border-color: #0ea5e9; /* Bright blue on focus */
       outline: none;
     }
-    .add-item button {
-      padding: 8px 20px;
-      border: none;
-      background: #17a2b8;
-      color: white;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
+
+    #storyForm button { 
+      margin-top: 12px; 
+      padding: 12px 24px; 
+      background-color: #0ea5e9; /* Bright blue */
+      color: white; 
+      border: none; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      font-weight: bold;
+      transition: background-color 0.3s ease;
     }
-    .footer {
-      text-align: center;
-      color: #a5b1c2;
-      font-size: 14px;
-      margin-top: 40px;
+
+    #storyForm button:hover {
+      background-color: #0284c7; /* Darker blue on hover */
+    }
+
+    #highlights { 
+      background: #475569; /* Slightly lighter slate */
+      border-radius: 12px; 
+      padding: 24px; 
+      margin-top: 30px;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .highlight-entry { 
+      background: #1e293b;
+      border-radius: 10px; 
+      margin-bottom: 16px; 
+      padding: 14px 20px; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      color: #e0e7ff; /* Pale lavender */
+      font-style: italic;
+      font-size: 15px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Group Hangout Agenda</h1>
-    <div class="agenda-section">
-      <h2>Topics We Want to Discuss</h2>
-      <ul id="agendaList" class="agenda-list">
-        <li>Favorite movies of 2025</li>
-        <li>Planning next outdoor activity</li>
-        <li>Discussing group project ideas</li>
-      </ul>
-      <div class="add-item">
-        <input type="text" id="newAgendaItem" placeholder="Add a new topic..." />
-        <button onclick="addAgendaItem()">Add</button>
-      </div>
-    </div>
-    <div class="footer">Created for our group activities © 2025</div>
+    <h1>Welcome to Our Group Hangouts</h1>
+    <img src="trio homepage picture.jpg" alt="Group photo" />
+    
+    <section id="storyForm">
+      <h2>Submit a Story</h2>
+      <textarea id="storyInput" rows="4" placeholder="Write your story or highlight here..."></textarea>
+      <button onclick="addStory()">Add Story</button>
+    </section>
+
+    <section id="highlights">
+      <h2>Highlights</h2>
+      <div id="storiesContainer"></div>
+    </section>
   </div>
+
   <script>
-    function addAgendaItem() {
-      var input = document.getElementById('newAgendaItem');
-      var value = input.value.trim();
-      if(value) {
-        var ul = document.getElementById('agendaList');
-        var li = document.createElement('li');
-        li.textContent = value;
-        ul.appendChild(li);
-        input.value = '';
-      }
+    function addStory() {
+      const input = document.getElementById('storyInput');
+      const text = input.value.trim();
+      if(text === '') return alert('Please enter a story.');
+      
+      const container = document.getElementById('storiesContainer');
+      const entry = document.createElement('div');
+      entry.className = 'highlight-entry';
+      entry.textContent = text;
+      
+      // Add the new story on top
+      container.insertBefore(entry, container.firstChild);
+      
+      input.value = '';
     }
   </script>
 </body>
