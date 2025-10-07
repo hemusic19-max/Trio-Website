@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Hangout Agenda</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.07);
+      padding: 32px;
+    }
+    h1 {
+      text-align: center;
+      color: #303952;
+      margin-bottom: 24px;
+    }
+    .agenda-section {
+      margin-bottom: 32px;
+    }
+    .agenda-list {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+    .agenda-list li {
+      margin-bottom: 12px;
+      color: #535c68;
+    }
+    .add-item {
+      display: flex;
+      margin-top: 20px;
+    }
+    .add-item input {
+      padding: 8px;
+      flex: 1;
+      border: 1px solid #dff9fb;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+    }
+    .add-item button {
+      padding: 8px 20px;
+      border: none;
+      background: #17a2b8;
+      color: white;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    .footer {
+      text-align: center;
+      color: #a5b1c2;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Group Hangout Agenda</h1>
+    <div class="agenda-section">
+      <h2>Topics We Want to Discuss</h2>
+      <ul id="agendaList" class="agenda-list">
+        <li>Favorite movies of 2025</li>
+        <li>Planning next outdoor activity</li>
+        <li>Discussing group project ideas</li>
+      </ul>
+      <div class="add-item">
+        <input type="text" id="newAgendaItem" placeholder="Add a new topic..." />
+        <button onclick="addAgendaItem()">Add</button>
+      </div>
+    </div>
+    <div class="footer">Created for our group activities © 2025</div>
+  </div>
+  <script>
+    function addAgendaItem() {
+      var input = document.getElementById('newAgendaItem');
+      var value = input.value.trim();
+      if(value) {
+        var ul = document.getElementById('agendaList');
+        var li = document.createElement('li');
+        li.textContent = value;
+        ul.appendChild(li);
+        input.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
