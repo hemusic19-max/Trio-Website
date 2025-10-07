@@ -3,219 +3,137 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Trio Group Homepage</title>
+<title>Trio Home Base</title>
 <style>
+  :root {
+    --background: #F5E0B7;
+    --primary-text: #003249;
+    --secondary-text: #875053;
+    --nav-bg: #875053;
+    --nav-link-bg: #D3F9B5;
+    --nav-link-active: #F5E0B7;
+    --accent: #D3F9B5;
+  }
   body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #F5E0B7;
-    color: #003249;
     margin: 0;
-    padding: 20px;
-    line-height: 1.6;
+    padding: 0;
+    background: var(--background);
+    color: var(--primary-text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
   }
-  .container {
-    max-width: 800px;
-    margin: auto;
-    background: #fff;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  }
-  h1, h2 {
+  .banner {
+    background: var(--secondary-text);
+    color: var(--nav-link-active);
     text-align: center;
-    color: #003249;
+    letter-spacing: 1.5rem;
+    font-size: 2rem;
+    padding: 36px 0 18px 0;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
   }
-  h2 {
-    margin-top: 40px;
+  nav {
+    display: flex;
+    justify-content: center;
+    background: var(--nav-bg);
+    border-bottom: 4px solid var(--accent);
+    padding: 0;
+    margin: 0;
   }
-  iframe {
-    width: 100%;
-    height: 600px;
+  nav a {
+    color: var(--nav-link-bg);
+    background: var(--nav-bg);
+    text-decoration: none;
+    padding: 18px 36px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: background 0.2s, color 0.2s;
     border: none;
-    border-radius: 10px;
-    margin-bottom: 40px;
-  }
-  #memoryForm textarea,
-  #imageSubmitForm input[type="url"] {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid #D3F9B5;
-    background-color: #F5E0B7;
-    color: #003249;
-    resize: vertical;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-  }
-  #memoryForm textarea:focus,
-  #imageSubmitForm input[type="url"]:focus {
-    border-color: #875053;
     outline: none;
   }
-  #memoryForm button,
-  #imageSubmitForm button {
-    margin-top: 12px;
-    padding: 12px 24px;
-    background-color: #875053;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  nav a.active, nav a:hover {
+    color: var(--secondary-text);
+    background: var(--nav-link-active);
   }
-  #memoryForm button:hover,
-  #imageSubmitForm button:hover {
-    background-color: #5F3D46;
-  }
-  #memoryHighlight {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #D3F9B5;
-    border-radius: 12px;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-    font-style: italic;
-    font-size: 18px;
-    min-height: 60px;
+  .main-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .slideshow-container {
-    position: relative;
-    max-width: 100%;
+    gap: 60px;
+    max-width: 1100px;
     margin: 40px auto;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    padding: 0 18px;
+    align-items: flex-start;
   }
-  .slide {
-    display: none;
-    width: 100%;
-    height: 400px;
-    object-fit: contain;
+  .left-col, .right-col {
+    flex: 1;
+  }
+  .section-title {
+    color: var(--secondary-text);
+    margin-top: 0;
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+  }
+  .highlight-img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    border: 3px solid var(--accent);
+  }
+  .quote {
+    color: var(--secondary-text);
+    font-style: italic;
+    margin-top: 28px;
+    margin-bottom: 0;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+  .card {
+    background: var(--accent);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    color: var(--primary-text);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    font-size: 1.05rem;
   }
 </style>
 </head>
 <body>
-<div class="container">
-<h1>Trio Group Homepage</h1>
-
-<section>
-<h2>Trio World Tour - Suggest Places</h2>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc9zsSIqS26nHLv8kfUwxwI-l3PxvDFNn2VfDc3Nnt94Iw5bA/viewform?embedded=true" width="100%" height="600" style="border:none; border-radius:10px;"></iframe>
-</section>
-
-<section>
-<h2>Memory Keeper</h2>
-<form id="memoryForm" onsubmit="addMemory(event)">
-<textarea id="memoryInput" rows="4" placeholder="Share a memory or highlight..."></textarea>
-<button type="submit">Add Memory</button>
-</form>
-<div id="memoryHighlight">No memories yet. Add one above!</div>
-</section>
-
-<section>
-<h2>Photo Highlights</h2>
-
-<form id="imageSubmitForm" onsubmit="submitPicture(event)">
-<input type="url" id="picUrl" placeholder="Enter image URL to submit" required />
-<button type="submit">Submit Picture</button>
-</form>
-
-<div class="slideshow-container" id="slideshow"></div>
-</section>
-</div>
-
-<script>
-  // Memory keeper
-  function getMemories() {
-    const mems = localStorage.getItem('trioMemories');
-    return mems ? JSON.parse(mems) : [];
-  }
-  function saveMemories(memories) {
-    localStorage.setItem('trioMemories', JSON.stringify(memories));
-  }
-  function addMemory(e) {
-    e.preventDefault();
-    const input = document.getElementById('memoryInput');
-    const text = input.value.trim();
-    if (!text) return alert('Please enter a memory.');
-    const mems = getMemories();
-    mems.push(text);
-    saveMemories(mems);
-    input.value = '';
-    displayRandomMemory();
-  }
-  function displayRandomMemory() {
-    const mems = getMemories();
-    const highlight = document.getElementById('memoryHighlight');
-    if (mems.length === 0) {
-      highlight.textContent = 'No memories yet. Add one above!';
-      return;
-    }
-    const randIndex = Math.floor(Math.random() * mems.length);
-    highlight.textContent = mems[randIndex];
-  }
-
-  // Image submission and slideshow
-  function getPics() {
-    const pics = localStorage.getItem('submittedPics');
-    return pics ? JSON.parse(pics) : [
-      "https://picsum.photos/id/1018/600/400",
-      "https://picsum.photos/id/1025/600/400",
-      "https://picsum.photos/id/1035/600/400"
-    ];
-  }
-  function savePics(pics) {
-    localStorage.setItem('submittedPics', JSON.stringify(pics));
-  }
-  function submitPicture(event) {
-    event.preventDefault();
-    const input = document.getElementById('picUrl');
-    const url = input.value.trim();
-    if (!url) {
-      alert('Please enter a valid image URL.');
-      return;
-    }
-    const pics = getPics();
-    pics.push(url);
-    savePics(pics);
-    input.value = '';
-    displaySlides();
-  }
-  function displaySlides() {
-    const pics = getPics();
-    const container = document.getElementById('slideshow');
-    container.innerHTML = '';
-    pics.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.className = 'slide';
-      container.appendChild(img);
-    });
-    slideIndex = 0;
-    showSlides();
-  }
-  let slideIndex = 0;
-  let slideInterval;
-  function showSlides() {
-    const slides = document.getElementsByClassName('slide');
-    if (slides.length === 0) return;
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = 'none';
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) slideIndex = 1;
-    slides[slideIndex - 1].style.display = 'block';
-    clearTimeout(slideInterval);
-    slideInterval = setTimeout(showSlides, 4000);
-  }
-
-  window.onload = () => {
-    displayRandomMemory();
-    displaySlides();
-  }
-</script>
+  <div class="banner">TRIO&nbsp;&nbsp;&nbsp;HOME&nbsp;&nbsp;&nbsp;BASE</div>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="trio-tour.html">Trio World Tour</a>
+    <a href="memory-keeper.html">Memory Keeper</a>
+    <a href="photo-highlights.html">Photo Highlights</a>
+  </nav>
+  <div class="main-content">
+    <div class="left-col">
+      <div class="card">
+        <span class="section-title">Welcome to Trio Home Base!</span>
+        <p>
+          This is the center for our adventures, dreaming up new destinations, telling our stories, and highlighting our favorite photos together. Let's make memories and pick new places for our Trio to explore!
+        </p>
+        <p>
+          Use the navigation bar to suggest travel stops for the World Tour, share or browse memories, and submit your best snapshots for everyone to see.
+        </p>
+      </div>
+      <img src="https://picsum.photos/id/1018/400/250" alt="Placeholder Group Photo" class="highlight-img" />
+      <p class="quote">"Respect others if you want to be respected"</p>
+    </div>
+    <div class="right-col">
+      <div class="card">
+        <span class="section-title">Current Highlights</span>
+        <img src="https://picsum.photos/id/1025/200/120" alt="Classmates" style="width:100%;border-radius:8px;margin-bottom:8px;">
+        <em style="color:#875053">Fun with Friends</em>
+      </div>
+      <div class="card">
+        <span class="section-title">Our Best Moments</span>
+        <img src="https://picsum.photos/id/1035/200/120" alt="Group Fun" style="width:100%;border-radius:8px;">
+        <em style="color:#875053">Unforgettable Days</em>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
+
 
