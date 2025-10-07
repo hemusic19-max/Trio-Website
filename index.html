@@ -1,127 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Group Hangout Homepage</title>
-  <style>
-    body { 
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #1e293b; /* Dark blue-gray background */
-      color: #f1f5f9; /* Light text color */
-      margin: 0; 
-      padding: 0; 
-    }
-
-    .container { 
-      max-width: 700px; 
-      margin: 40px auto; 
-      background: #334155; /* Medium slate color */
-      border-radius: 12px; 
-      padding: 32px; 
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    h1, h2 { 
-      text-align: center; 
-      color: #f8fafc; /* Near white for headings */
-      margin-bottom: 1rem;
-    }
-
-    img { 
-      width: 100%; 
-      height: auto; 
-      border-radius: 10px; 
-      margin-bottom: 20px; 
-      border: 3px solid #0ea5e9; /* Bright blue border */
-    }
-
-    #storyForm textarea { 
-      width: 100%; 
-      padding: 12px; 
-      font-size: 16px; 
-      border-radius: 8px; 
-      border: 2px solid #64748b; /* Steel blue border */
-      background-color: #1e293b; 
-      color: #f1f5f9;
-      resize: vertical;
-      transition: border-color 0.3s ease;
-    }
-
-    #storyForm textarea:focus {
-      border-color: #0ea5e9; /* Bright blue on focus */
-      outline: none;
-    }
-
-    #storyForm button { 
-      margin-top: 12px; 
-      padding: 12px 24px; 
-      background-color: #0ea5e9; /* Bright blue */
-      color: white; 
-      border: none; 
-      border-radius: 8px; 
-      cursor: pointer; 
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    #storyForm button:hover {
-      background-color: #0284c7; /* Darker blue on hover */
-    }
-
-    #highlights { 
-      background: #475569; /* Slightly lighter slate */
-      border-radius: 12px; 
-      padding: 24px; 
-      margin-top: 30px;
-      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
-    }
-
-    .highlight-entry { 
-      background: #1e293b;
-      border-radius: 10px; 
-      margin-bottom: 16px; 
-      padding: 14px 20px; 
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      color: #e0e7ff; /* Pale lavender */
-      font-style: italic;
-      font-size: 15px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Trio Group Homepage</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #F5E0B7;
+    color: #003249;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  }
+  h1, h2 {
+    text-align: center;
+    color: #003249;
+  }
+  h2 {
+    margin-top: 40px;
+  }
+  iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 40px;
+  }
+  #memoryForm textarea,
+  #imageSubmitForm input[type="url"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #D3F9B5;
+    background-color: #F5E0B7;
+    color: #003249;
+    resize: vertical;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  #memoryForm textarea:focus,
+  #imageSubmitForm input[type="url"]:focus {
+    border-color: #875053;
+    outline: none;
+  }
+  #memoryForm button,
+  #imageSubmitForm button {
+    margin-top: 12px;
+    padding: 12px 24px;
+    background-color: #875053;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  #memoryForm button:hover,
+  #imageSubmitForm button:hover {
+    background-color: #5F3D46;
+  }
+  #memoryHighlight {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #D3F9B5;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    font-style: italic;
+    font-size: 18px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: 40px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+  }
+  .slide {
+    display: none;
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Welcome to Our Group Hangouts</h1>
-    <img src="trio homepage picture.jpg" alt="Group photo" />
-    
-    <section id="storyForm">
-      <h2>Submit a Story</h2>
-      <textarea id="storyInput" rows="4" placeholder="Write your story or highlight here..."></textarea>
-      <button onclick="addStory()">Add Story</button>
-    </section>
+<div class="container">
+<h1>Trio Group Homepage</h1>
 
-    <section id="highlights">
-      <h2>Highlights</h2>
-      <div id="storiesContainer"></div>
-    </section>
-  </div>
+<section>
+<h2>Trio World Tour - Suggest Places</h2>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc9zsSIqS26nHLv8kfUwxwI-l3PxvDFNn2VfDc3Nnt94Iw5bA/viewform?embedded=true" width="100%" height="600" style="border:none; border-radius:10px;"></iframe>
+</section>
 
-  <script>
-    function addStory() {
-      const input = document.getElementById('storyInput');
-      const text = input.value.trim();
-      if(text === '') return alert('Please enter a story.');
-      
-      const container = document.getElementById('storiesContainer');
-      const entry = document.createElement('div');
-      entry.className = 'highlight-entry';
-      entry.textContent = text;
-      
-      // Add the new story on top
-      container.insertBefore(entry, container.firstChild);
-      
-      input.value = '';
+<section>
+<h2>Memory Keeper</h2>
+<form id="memoryForm" onsubmit="addMemory(event)">
+<textarea id="memoryInput" rows="4" placeholder="Share a memory or highlight..."></textarea>
+<button type="submit">Add Memory</button>
+</form>
+<div id="memoryHighlight">No memories yet. Add one above!</div>
+</section>
+
+<section>
+<h2>Photo Highlights</h2>
+
+<form id="imageSubmitForm" onsubmit="submitPicture(event)">
+<input type="url" id="picUrl" placeholder="Enter image URL to submit" required />
+<button type="submit">Submit Picture</button>
+</form>
+
+<div class="slideshow-container" id="slideshow"></div>
+</section>
+</div>
+
+<script>
+  // Memory keeper
+  function getMemories() {
+    const mems = localStorage.getItem('trioMemories');
+    return mems ? JSON.parse(mems) : [];
+  }
+  function saveMemories(memories) {
+    localStorage.setItem('trioMemories', JSON.stringify(memories));
+  }
+  function addMemory(e) {
+    e.preventDefault();
+    const input = document.getElementById('memoryInput');
+    const text = input.value.trim();
+    if (!text) return alert('Please enter a memory.');
+    const mems = getMemories();
+    mems.push(text);
+    saveMemories(mems);
+    input.value = '';
+    displayRandomMemory();
+  }
+  function displayRandomMemory() {
+    const mems = getMemories();
+    const highlight = document.getElementById('memoryHighlight');
+    if (mems.length === 0) {
+      highlight.textContent = 'No memories yet. Add one above!';
+      return;
     }
-  </script>
+    const randIndex = Math.floor(Math.random() * mems.length);
+    highlight.textContent = mems[randIndex];
+  }
+
+  // Image submission and slideshow
+  function getPics() {
+    const pics = localStorage.getItem('submittedPics');
+    return pics ? JSON.parse(pics) : [
+      "https://picsum.photos/id/1018/600/400",
+      "https://picsum.photos/id/1025/600/400",
+      "https://picsum.photos/id/1035/600/400"
+    ];
+  }
+  function savePics(pics) {
+    localStorage.setItem('submittedPics', JSON.stringify(pics));
+  }
+  function submitPicture(event) {
+    event.preventDefault();
+    const input = document.getElementById('picUrl');
+    const url = input.value.trim();
+    if (!url) {
+      alert('Please enter a valid image URL.');
+      return;
+    }
+    const pics = getPics();
+    pics.push(url);
+    savePics(pics);
+    input.value = '';
+    displaySlides();
+  }
+  function displaySlides() {
+    const pics = getPics();
+    const container = document.getElementById('slideshow');
+    container.innerHTML = '';
+    pics.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.className = 'slide';
+      container.appendChild(img);
+    });
+    slideIndex = 0;
+    showSlides();
+  }
+  let slideIndex = 0;
+  let slideInterval;
+  function showSlides() {
+    const slides = document.getElementsByClassName('slide');
+    if (slides.length === 0) return;
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1;
+    slides[slideIndex - 1].style.display = 'block';
+    clearTimeout(slideInterval);
+    slideInterval = setTimeout(showSlides, 4000);
+  }
+
+  window.onload = () => {
+    displayRandomMemory();
+    displaySlides();
+  }
+</script>
 </body>
 </html>
+
