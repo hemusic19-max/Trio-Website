@@ -103,6 +103,11 @@
     flex-direction: column;
     gap: 20px;
   }
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
   .card {
     background: var(--accent);
     border-radius: 12px;
@@ -155,7 +160,6 @@
   #formMessage {
     font-weight: bold;
   }
-  /* Responsive design for mobile screens */
   @media (max-width: 900px) {
     .content-row {
       flex-direction: column;
@@ -220,7 +224,15 @@
         <h3>Our Trio</h3>
         <img src="homepage.jpg" alt="Photo of the Trio" />
       </div>
-
+    </div>
+    <div class="right-col">
+      <div class="card calendar-card">
+        <iframe
+          class="calendar-iframe"
+          src="https://calendar.google.com/calendar/embed?src=779135d36bbdaa2917cdcdf7bd72c8ee15d6b5b312a3be83f1f6d567509807c9%40group.calendar.google.com&ctz=America%2FChicago"
+          scrolling="no"
+        ></iframe>
+      </div>
       <div class="card">
         <h3>Submit Trio Event</h3>
         <form id="eventForm">
@@ -235,16 +247,6 @@
           <button type="submit">Submit Event</button>
         </form>
         <p id="formMessage"></p>
-      </div>
-    </div>
-
-    <div class="right-col">
-      <div class="card calendar-card">
-        <iframe
-          class="calendar-iframe"
-          src="https://calendar.google.com/calendar/embed?src=779135d36bbdaa2917cdcdf7bd72c8ee15d6b5b312a3be83f1f6d567509807c9%40group.calendar.google.com&ctz=America%2FChicago"
-          scrolling="no"
-        ></iframe>
       </div>
     </div>
   </div>
