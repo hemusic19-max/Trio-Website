@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trio Home Base</title>
-<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" />
 <style>
   :root {
     --background: #F5E0B7;
@@ -87,6 +87,7 @@
     gap: 40px;
     max-width: 1100px;
     margin: 0 auto 60px auto;
+    text-align: left;
   }
   .left-col {
     flex: 1;
@@ -104,7 +105,6 @@
     color: var(--primary-text);
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
     font-size: 1rem;
-    text-align: center;
     font-family: Georgia, serif;
   }
   iframe.calendar-iframe {
@@ -121,6 +121,32 @@
     font-style: italic;
     color: var(--secondary-text);
     margin-top: 12px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  input, textarea, button {
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--secondary-text);
+  }
+  button {
+    background-color: var(--secondary-text);
+    color: var(--nav-link-active);
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 12px;
+  }
+  button:hover {
+    background-color: var(--primary-text);
+  }
+  #formMessage {
+    font-weight: bold;
   }
 </style>
 </head>
@@ -142,24 +168,78 @@
     <div class="left-col">
       <div class="card photo">
         <h3>Our Trio</h3>
-        <img src="homepage.jpg" alt="Photo of the Trio">
+        <img src="homepage.jpg" alt="Photo of the Trio" />
       </div>
 
-      <div class="card submission-placeholder">
-        <h3>Event Submissions</h3>
-        <p>Submit new trio events here (coming soon!)</p>
+      <div class="card">
+        <h3>Submit Trio Event</h3>
+        <form id="eventForm">
+          <input type="text" id="title" placeholder="Event Title" required />
+          <textarea id="description" placeholder="Event Description"></textarea>
+          <label>Start Time:
+            <input type="datetime-local" id="start" required />
+          </label>
+          <label>End Time:
+            <input type="datetime-local" id="end" required />
+          </label>
+          <button type="submit">Submit Event</button>
+        </form>
+        <p id="formMessage"></p>
       </div>
     </div>
 
     <div class="right-col">
       <div class="card calendar-card">
-        <iframe class="calendar-iframe"
+        <iframe
+          class="calendar-iframe"
           src="https://calendar.google.com/calendar/embed?src=779135d36bbdaa2917cdcdf7bd72c8ee15d6b5b312a3be83f1f6d567509807c9%40group.calendar.google.com&ctz=America%2FChicago"
-          scrolling="no"></iframe>
+          scrolling="no"
+        ></iframe>
       </div>
     </div>
   </div>
+
+  <script>
+    const form = document.getElementById('eventForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+
+      if (!title || !start || !end) {
+        formMessage.textContent = 'Please fill title, start, and end times.';
+        formMessage.style.color = 'red';
+        return;
+      }
+
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzvo7FnpfMxatcDnn-7ZQjGNR2SHQ-COQTemGnCi-ulWKIwjcVRxYgDOWU1A5-onwja/exec', {
+          method: 'POST',
+          body: JSON.stringify({ title, description, start, end }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const result = await response.json();
+        if (result.result === 'success') {
+          formMessage.textContent = 'Event submitted successfully!';
+          formMessage.style.color = 'green';
+          form.reset();
+        } else {
+          formMessage.textContent = 'There was an error submitting the event.';
+          formMessage.style.color = 'red';
+        }
+      } catch (e) {
+        formMessage.textContent = 'Network error. Please try again later.';
+        formMessage.style.color = 'red';
+      }
+    });
+  </script>
 </body>
 </html>
-
-
