@@ -10,65 +10,92 @@
     --background: #F5E0B7;
     --primary-text: #003249;
     --secondary-text: #875053;
-    --nav-bg: #875053;
-    --nav-link-bg: #D3F9B5;
-    --nav-link-active: #F5E0B7;
     --accent: #D3F9B5;
   }
   body {
     font-family: Georgia, serif;
-    margin: 0; padding: 0 8px;
+    margin: 0;
+    padding: 16px;
     background: var(--background);
     color: var(--primary-text);
     min-height: 100vh;
   }
-  h1 {
-    font-family: 'Pacifico', cursive;
-    color: var(--secondary-text);
-    text-align: center;
-    margin-top: 24px;
+  .home-button {
+    display: inline-block;
     margin-bottom: 16px;
+    padding: 8px 14px;
+    background-color: var(--secondary-text);
+    color: var(--accent);
+    font-family: Georgia, serif;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   }
-  iframe.form-embed {
+  .home-button:hover {
+    background-color: var(--accent);
+    color: var(--primary-text);
+  }
+  .page-title-banner {
+    background-color: var(--secondary-text);
+    color: var(--accent);
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    border-radius: 12px;
+    padding: 24px 16px;
+    font-size: 2rem;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .split-container {
+    display: flex;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .split-item {
+    flex: 1;
+  }
+  iframe {
+    width: 100%;
     border: none;
     border-radius: 12px;
-    width: 100%;
-    max-width: 660px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  iframe.form-embed {
     height: 880px;
-    display: block;
-    margin: 0 auto 40px auto;
   }
   iframe.sheet-embed {
-    width: 100%;
-    max-width: 1000px;
-    height: 600px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-    display: block;
-    margin: 0 auto 40px auto;
+    height: 880px;
   }
-  @media(max-width: 720px) {
-    iframe.form-embed {
-      height: 900px;
+  @media (max-width: 900px) {
+    .split-container {
+      flex-direction: column;
     }
+    iframe.form-embed,
     iframe.sheet-embed {
-      height: 400px;
+      height: 700px;
     }
   }
-  @media(max-width: 400px) {
-    iframe.form-embed {
-      height: 1100px;
-    }
+  @media (max-width: 480px) {
+    iframe.form-embed,
     iframe.sheet-embed {
-      height: 300px;
+      height: 600px;
     }
   }
 </style>
 </head>
 <body>
-  <h1>Trio World Tour: Suggest Destinations</h1>
-  <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSc9zsSIqS26nHLv8kfUwxwI-l3PxvDFNn2VfDc3Nnt94Iw5bA/viewform?embedded=true"></iframe>
-  <h1>Suggestions Submitted</h1>
-  <iframe class="sheet-embed" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT0LemCW0_9fu9Z9La5LlrBUkv77bQ8Z1ZGe6ta2q5QQNoBny_FMojTM0Xv8Kb-tmHdYfzbOl5nwcrF/pubhtml?widget=true&amp;headers=false"></iframe>
+  <a class="home-button" href="index.html">&larr; Home</a>
+  <div class="page-title-banner">Trio World Tour: Suggest Destinations</div>
+
+  <div class="split-container">
+    <div class="split-item">
+      <iframe class="form-embed" src="https://docs.google.com/forms/d/e/1FAIpQLSc9zsSIqS26nHLv8kfUwxwI-l3PxvDFNn2VfDc3Nnt94Iw5bA/viewform?embedded=true"></iframe>
+    </div>
+    <div class="split-item">
+      <iframe class="sheet-embed" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT0LemCW0_9fu9Z9La5LlrBUkv77bQ8Z1ZGe6ta2q5QQNoBny_FMojTM0Xv8Kb-tmHdYfzbOl5nwcrF/pubhtml?widget=true&amp;headers=false"></iframe>
+    </div>
+  </div>
 </body>
 </html>
