@@ -27,15 +27,17 @@
     font-family: 'Pacifico', cursive;
     background: var(--secondary-text);
     color: var(--nav-link-active);
-    letter-spacing: 1.5rem;
+    letter-spacing: 0.3rem;
     font-size: 2rem;
     padding: 36px 0 18px 0;
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
     margin-bottom: 40px;
+    word-break: break-word;
   }
   nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     background: var(--nav-bg);
     border-bottom: 4px solid var(--accent);
@@ -46,11 +48,13 @@
     color: var(--nav-link-bg);
     background: var(--nav-bg);
     text-decoration: none;
-    padding: 18px 36px;
+    padding: 18px 24px;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     transition: background 0.2s, color 0.2s;
     font-family: Georgia, serif;
+    border-radius: 0;
+    display: block;
   }
   nav a.active, nav a:hover {
     color: var(--secondary-text);
@@ -59,11 +63,11 @@
   .welcome-card {
     background: var(--accent);
     border-radius: 12px;
-    padding: 24px 40px;
+    padding: 24px 16px;
     color: var(--primary-text);
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
-    font-size: 1.3rem;
-    max-width: 90vw;
+    font-size: 1.18rem;
+    max-width: 98vw;
     margin: 0 auto 40px auto;
     box-sizing: border-box;
     text-align: left;
@@ -72,7 +76,7 @@
   .welcome-card span.title {
     font-weight: bold;
     color: var(--secondary-text);
-    font-size: 1.8rem;
+    font-size: 1.45rem;
     font-family: 'Pacifico', cursive;
     display: block;
     margin-bottom: 8px;
@@ -84,32 +88,35 @@
   .content-row {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    max-width: 1100px;
+    gap: 32px;
+    max-width: 98vw;
     margin: 0 auto 60px auto;
     text-align: left;
+    align-items: flex-start;
+  }
+  .left-col, .right-col {
+    flex: 1;
+    min-width: 0;
   }
   .left-col {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-  }
-  .right-col {
-    flex: 1;
+    gap: 20px;
   }
   .card {
     background: var(--accent);
     border-radius: 12px;
-    padding: 20px;
+    padding: 18px;
     color: var(--primary-text);
     box-shadow: 0 2px 8px rgba(0,0,0,0.09);
     font-size: 1rem;
     font-family: Georgia, serif;
+    margin-bottom: 0;
   }
   iframe.calendar-iframe {
     width: 100%;
-    height: 380px;
+    min-width: 230px;
+    height: 340px;
     border: none;
     border-radius: 12px;
   }
@@ -117,22 +124,20 @@
     max-width: 100%;
     border-radius: 8px;
   }
-  .submit-placeholder {
-    font-style: italic;
-    color: var(--secondary-text);
-    margin-top: 12px;
-  }
   form {
     display: flex;
     flex-direction: column;
+    gap: 8px;
   }
   input, textarea, button {
     font-family: Georgia, serif;
     font-size: 1rem;
-    margin-bottom: 12px;
-    padding: 8px;
     border-radius: 6px;
     border: 1px solid var(--secondary-text);
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 0;
   }
   button {
     background-color: var(--secondary-text);
@@ -140,13 +145,58 @@
     border: none;
     font-weight: bold;
     cursor: pointer;
-    padding: 12px;
+    padding: 12px 0;
+    margin-top: 8px;
   }
   button:hover {
     background-color: var(--primary-text);
+    color: var(--accent);
   }
   #formMessage {
     font-weight: bold;
+  }
+  /* Responsive design for mobile screens */
+  @media (max-width: 900px) {
+    .content-row {
+      flex-direction: column;
+      gap: 28px;
+      max-width: 98vw;
+    }
+    .left-col, .right-col {
+      width: 100%;
+      min-width: 0;
+      flex: none;
+    }
+    .card, .welcome-card {
+      margin: 0 auto 24px auto;
+      width: 98vw;
+      max-width: 500px;
+    }
+    .banner {
+      font-size: 1.2rem;
+      padding: 24px 0 10px 0;
+      letter-spacing: 0.13rem;
+    }
+    nav a {
+      padding: 14px 6vw;
+      font-size: 1rem;
+    }
+    iframe.calendar-iframe {
+      min-width: unset;
+      height: 300px;
+    }
+  }
+  @media (max-width: 600px) {
+    .welcome-card, .card {
+      padding: 12px 6px;
+      font-size: 0.96rem;
+    }
+    .banner {
+      font-size: 1.03rem;
+      padding: 15px 0 7px 0;
+    }
+    nav a { padding: 10px 4vw; }
+    iframe.calendar-iframe { height: 230px; }
   }
 </style>
 </head>
